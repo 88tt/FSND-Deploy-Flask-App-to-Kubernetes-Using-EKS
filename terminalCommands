@@ -1,0 +1,18 @@
+# build container
+docker build --tag jwt-api-test .
+
+# view all images
+docker images
+
+# running container
+docker run --env-file=env_file  -p 80:8080 jwt-api-test
+
+# kill previously ran container
+docker container ls
+docker ps
+docker rm -f containerID
+
+# curl commands
+export TOKEN=`curl -d '{"email":"abc","password":"abc"}' -H "Content-Type: application/json" -X POST localhost:80/auth  | jq -r '.token'`
+
+curl -d '{"email":"abc","password":"xxx"}' -H "Content-Type: application/json" -X POST localhost:80/auth | Select Content - | jq -r '.token'
